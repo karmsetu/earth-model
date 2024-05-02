@@ -3,18 +3,25 @@ import { Canvas } from '@react-three/fiber';
 import './App.css';
 import Earth from './components/Earth';
 import { OrbitControls } from '@react-three/drei';
-import Pointer from './components/Pointer';
 import Curve from './components/Curve';
+import { countryCoordinates } from './data';
+import { Color } from 'three';
+import { randomHexColor } from './utils/main';
 
 function App() {
-    const greeceCoord = {
-        userLat: 39.013257473656004,
-        userLng: 21.973359536934538,
-    };
-    const indiaCoord = {
-        userLat: 20.5937,
-        userLng: 78.9629,
-    };
+    const curves = [];
+    for (let i = 0; i < countryCoordinates.length - 1; i++) {
+        const element = (
+            <Curve
+                pos1={countryCoordinates[i]}
+                pos2={countryCoordinates[i + 1]}
+                radius={1}
+                size={0.001}
+                color={new Color(randomHexColor())}
+            />
+        );
+        curves.push(element);
+    }
     return (
         <>
             <Canvas>
@@ -27,9 +34,8 @@ function App() {
                     intensity={Math.PI}
                 />
                 <Earth />
-                <Curve pos1={greeceCoord} pos2={indiaCoord} radius={1} />
-                <Pointer coord={greeceCoord} radius={1} />
-                <Pointer coord={indiaCoord} radius={1} />
+                {curves.map((elem) => elem)}
+                {/* <Curve pos1={greeceCoord} pos2={indiaCoord} radius={1} /> */}
                 <OrbitControls />
             </Canvas>
         </>
