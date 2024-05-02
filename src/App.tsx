@@ -3,8 +3,14 @@ import { Canvas } from '@react-three/fiber';
 import './App.css';
 import Earth from './components/Earth';
 import { OrbitControls } from '@react-three/drei';
+import Pointer from './components/Pointer';
 
 function App() {
+    const coord = {
+        userLat: 39.013257473656004,
+        userLng: 21.973359536934538,
+        radius: 1,
+    };
     return (
         <>
             <Canvas>
@@ -17,12 +23,8 @@ function App() {
                     intensity={Math.PI}
                 />
                 <Earth />
-                <OrbitControls
-                    minAzimuthAngle={-Math.PI / 4}
-                    maxAzimuthAngle={Math.PI / 4}
-                    minPolarAngle={Math.PI / 6}
-                    maxPolarAngle={Math.PI - Math.PI / 6}
-                />
+                <Pointer coord={coord} />
+                <OrbitControls />
             </Canvas>
         </>
     );
