@@ -4,12 +4,16 @@ import './App.css';
 import Earth from './components/Earth';
 import { OrbitControls } from '@react-three/drei';
 import Pointer from './components/Pointer';
+import Curve from './components/Curve';
 
 function App() {
-    const coord = {
+    const greeceCoord = {
         userLat: 39.013257473656004,
         userLng: 21.973359536934538,
-        radius: 1,
+    };
+    const indiaCoord = {
+        userLat: 20.5937,
+        userLng: 78.9629,
     };
     return (
         <>
@@ -23,7 +27,9 @@ function App() {
                     intensity={Math.PI}
                 />
                 <Earth />
-                <Pointer coord={coord} />
+                <Curve pos1={greeceCoord} pos2={indiaCoord} radius={1} />
+                <Pointer coord={greeceCoord} radius={1} />
+                <Pointer coord={indiaCoord} radius={1} />
                 <OrbitControls />
             </Canvas>
         </>

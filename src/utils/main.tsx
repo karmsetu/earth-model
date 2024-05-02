@@ -4,5 +4,5 @@ export function latLonToCart(userLat: number, userLng: number, radius: number) {
     const z = radius * Math.cos(lat) * Math.cos(lng);
     const x = radius * Math.cos(lat) * Math.sin(lng);
     const y = radius * Math.sin(lat);
-    return [x, y, z];
+    return { x, y, z };
 }

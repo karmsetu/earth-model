@@ -1,15 +1,14 @@
 import { useRef } from 'react';
 import { Mesh } from 'three';
 import { latLonToCart } from '../utils/main';
+import { Coord } from '../types/main';
 
-type Coord = { userLat: number; userLng: number; radius: number };
-
-export default function Pointer(props: { coord: Coord }) {
+export default function Pointer(props: { coord: Coord; radius: number }) {
     const pointerRef = useRef<Mesh>(null!);
-    const [x, y, z] = latLonToCart(
+    const { x, y, z } = latLonToCart(
         props.coord.userLat,
         props.coord.userLng,
-        props.coord.radius
+        props.radius
     );
     return (
         <mesh ref={pointerRef} position={[x, y, z]}>
